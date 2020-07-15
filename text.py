@@ -1,3 +1,5 @@
+# This is planned to be an engine-module for PRG text-based game
+
 #_-_-_-_-_-_-Hero-_-_-_-_-_-_
 #
 # Char length standard -- 28 chars.
