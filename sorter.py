@@ -8,14 +8,17 @@ main_dict = {
     'Executables': '.exe',
     'Documents'  : ('.pdf', '.txt', '.iso'),
     'Images'     : ('.png', '.jpeg', '.gif'),
-    'Archives'   : ('.zip', '.rar', '.7z')
+    'Archives'   : ('.zip', '.rar', '.7z'),
+    'Music'      : ('.mp3', '.wav'),
+    'Videos'     : ('.mp4', '.AVI', '.mkv')
     }
 
 def main():
     
     for folder_name in main_dict:
-
-        os.mkdir(folder_name)
+        
+        if not os.path.exists(folder_name):
+            os.mkdir(folder_name)
         
         if type(main_dict[folder_name]) is tuple:
             for file_format in main_dict[folder_name]:
