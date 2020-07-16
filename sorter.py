@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-from tkinter improt Tk, messagebox
+from tkinter import Tk, messagebox
 
 main_dict = {
     'Executables': ('.exe',),
@@ -13,7 +13,7 @@ main_dict = {
 
 root = Tk()
 root.withdraw()
-if not messagebox.askyesno("Ask", "Are you sure"): exit()
+if not messagebox.askyesno("Question", "Are you sure?"): exit()
 
 p = Path(os.getcwd())
 
