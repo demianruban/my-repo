@@ -22,6 +22,7 @@ for folder_name, file_formats in main_dict.items():
     if not os.path.exists(folder_name): os.mkdir(folder_name)
 
     for file_format in file_formats:
+        # Search for files with current format and move them.
         for file in list(map(str, list(p.glob('*' + file_format)))):
             source = p / file
             destination = p / folder_name / file
