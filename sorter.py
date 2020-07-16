@@ -1,4 +1,5 @@
 import os
+from glob import glob
 from pathlib import Path
 from tkinter import Tk, messagebox
 
@@ -23,9 +24,9 @@ for folder_name, file_formats in main_dict.items():
 
     for file_format in file_formats:
         # Search for files with current format and move them.
-        for file in list(map(str, list(p.glob('*' + file_format)))):
+        for file in glob('*' + file_format):
             source = p / file
             destination = p / folder_name / file
-            os.replace(str(source.cwd()), str(destination.cwd()))
+            os.replace(str(source), str(destination))
             
 messagebox.showinfo("Info", "Sorting is finished.")
