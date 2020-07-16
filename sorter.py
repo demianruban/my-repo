@@ -1,10 +1,6 @@
 import os
 from pathlib import Path
 
-p = Path(os.getcwd())
-
-print("Current location:", os.getcwd())
-
 main_dict = {
     'Executables': ('.exe',),
     'Documents'  : ('.pdf', '.txt', '.iso'),
@@ -15,6 +11,8 @@ main_dict = {
     }
 
 def main():
+    
+    p = Path(os.getcwd())
     
     for folder_name, file_formats in main_dict.items():
         
@@ -28,5 +26,6 @@ def main():
 
                 
 if __name__ == '__main__':
+    print("Current location:", os.getcwd())
     main()
     input("Sorting is finished.")
