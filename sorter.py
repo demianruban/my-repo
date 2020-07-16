@@ -1,11 +1,12 @@
 import os
+from pathlib import Path
 
-location = os.getcwd()
+p = Path(os.getcwd())
 
-print("Current location:", location)
+print("Current location:", os.getcwd())
 
 main_dict = {
-    'Executables': '.exe',
+    'Executables': ('.exe',),
     'Documents'  : ('.pdf', '.txt', '.iso'),
     'Images'     : ('.png', '.jpeg', '.gif'),
     'Archives'   : ('.zip', '.rar', '.7z'),
@@ -15,27 +16,17 @@ main_dict = {
 
 def main():
     
-    for folder_name in main_dict:
+    for folder_name, file_formats in main_dict.items():
         
-        if not os.path.exists(folder_name):
-            os.mkdir(folder_name)
-        
-        if type(main_dict[folder_name]) is tuple:
-            for file_format in main_dict[folder_name]:
-                for file_name in os.listdir():    
-                    if file_name.endswith(file_format):
-                        os.replace(os.getcwd() + '\\' + file_name,
-                                   os.getcwd() + '\\' + folder_name
-                                   + '\\' + file_name)
+        if not os.path.exists(folder_name): os.mkdir(folder_name)
 
-        else:
-            file_format = main_dict[folder_name]
-            for file_name in os.listdir():
-                if file_name.endswith(file_format):
-                    os.replace(os.getcwd() + '\\' + file_name,
-                               os.getcwd() + '\\' + folder_name
-                               + '\\' + file_name)
+        for file_format in file_formats:
+            for file in list(map(str, list(p.glob('*' + file_format)))):
+                source = p / file
+                destination = p / folder_name / file
+                os.replace(str(source.cwd()), str(destination.cwd()))
 
+                
 if __name__ == '__main__':
     main()
     input("Sorting is finished.")
