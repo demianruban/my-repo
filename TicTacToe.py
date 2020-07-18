@@ -8,11 +8,9 @@
 
 def get_winner(board):
     wins = ((0,1,2),(3,4,5),(6,7,8),(0,3,6),(1,4,7),(2,5,8),(0,4,8),(2,4,6))
-    for i in wins:
-        if board[i[0]] in ('X', 'O') and board[i[0]] == board[i[1]] == board[i[2]]:
-            return board[i[0]]
-        else:
-            return False
+    for index1, index2, index3 in wins:
+        pos = [board[index1], board[index2], board[index3]]
+        pos[0] if all(e == pos[0] for e in pos) else False
 
 def get_opponent_for(player):
     return 'X' if player=='O' else 'O'
@@ -59,39 +57,18 @@ def move(board, player):
     return
 
 def start():
-    from random import randint
-    global computer, player
     while True:        
         a = input("Choose game mode:\n"
                   + "1. Two players.\n"
                   + "2. Single player.\n\n")
-        if int(a) == 1:
-            return ('X', 'O')
-            break
-        elif int(a) == 2:
-            computer, player = 'X', 'O'
-            break
+        if a in ('1', '2'):
+            return int(a)
         else:
+            print("Wrong input. Try again.")
             continue
-    return
 
-# Script:
 
-def cycle():
-    while True:
-        yield 'X'
-        yield 'O'
-
-iterator = cycle()
-board = ['_' for i in range(9)]
-computer, player = '', ''
-
-while True:
-    start()
-    
-    player = next(iterator)
-
-    # Creating map.
+def draw_board():
     indexes = [0, 1, 2]
     for i in range(3):
         print(' ' + ' | '.join(board[j] for j in indexes))
@@ -99,17 +76,24 @@ while True:
         indexes = [j + 3 for j in indexes]
     print()
 
-    move(board, player)
 
-    print(get_winner(board))
+def main():
+    board = ['_' for i in range(9)]
+    player1, player2, computer = '', '', ''
+    mode = 0
 
-##    result = minimax(board, player)
-##    
-##    if result == 0:
-##        print('Draw!')
-##    elif result == 1:
-##        print(player + ' won!')
-##    elif result == -1:
-##        print(get_oponnent_for(player) + ' won!')
+    while True:
+        mode = start()
+        if mode == 1:
+            player1, player2 = 'X', 'O'
+        else:
+            computer, player1 = 'X', 'O'
+        draw_board()
+        move(board, player)
+
+        print(get_winner(board))
+
+if __name__ == '__main__':
+    main()
 
         
