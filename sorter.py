@@ -1,5 +1,5 @@
 import os
-from glob import glob
+from glob import iglob
 from pathlib import Path
 from tkinter import Tk, messagebox
 
@@ -24,7 +24,7 @@ for folder_name, file_formats in main_dict.items():
 
     for file_format in file_formats:
         # Search for files with current format and move them.
-        for file in glob('*' + file_format):
+        for file in iglob('*' + file_format):
             source = p / file
             destination = p / folder_name / file
             os.replace(str(source), str(destination))
