@@ -3,28 +3,30 @@
 # 08/07/2020 summer edition!
 # by Demian Ruban (yalashara707@gmail.com)
 
-# There will no position writing needed anymore
-# Moves are made with special keys on keyboard.
-
 from random import randint
 
 def get_winner(board):
-    wins = ((0,1,2),(3,4,5),(6,7,8),(0,3,6),(1,4,7),(2,5,8),(0,4,8),(2,4,6))
-    for i, j, k in wins:
-        pos = [board[i], board[j], board[k]]
-        return pos[0] if all(e == pos[0] for e in pos) else False
+    wins = ((0, 1, 2), (3, 4, 5),
+            (6, 7, 8), (0, 3, 6),
+            (1, 4, 7), (2, 5, 8),
+            (0, 4, 8), (2, 4, 6))
+    for positions in wins:
+        pos_on_board = [board[i] for i in [*positions]]
+        if pos_on_board[0] != '_' and len(set(pos_on_board)) == 1:
+            return pos_on_board[0]
 
 def get_opponent_for(player):
     return 'X' if player=='O' else 'O'
     
 def minimax(board, player, mode) -> int:
     
-    return 1 if player == get_winner(board) else -1
-    
-    move = -1
-    score = -2
+    if player == get_winner(board):
+        return 1
 
-    if mode == 1:
+    if mode == 3:
+        move = -1
+        score = -2
+        
         for i in range(9):
             if board[i] == '_':
                 board_with_new_move = board
@@ -35,10 +37,10 @@ def minimax(board, player, mode) -> int:
                     score = score_for_the_move
                     move = i
     
-    if move == -1:
-        return 0
+        if move == -1:
+            return 0
 
-    return score
+        return score
 
 
 def move(board, player):
@@ -73,8 +75,9 @@ def draw_board(board):
 def ask_mode():
     while True:        
         a = input("Choose game mode:\n"
-                  + "1. Two players.\n"
-                  + "2. Single player.\n\n")
+                  + "1. Play online.\n"
+                  + "2. Play at single computer.\n"
+                  + "3. Single player.\n\n")
         if a in ('1', '2'):
             return int(a)
         else:
@@ -89,14 +92,21 @@ player = 'X' if randint(0, 1) == 0 else 'O'
 
 mode = ask_mode()
 
-while True:
-    player = get_opponent_for(player)
-    draw_board(board)
-    move(board, player)
-    result = minimax(board, player, mode)
-    if result == 1:
-        input(player + " won!")
-        break
-    elif result == 0:
-        input("Draw.")
-        break
+if mode == 1:
+    pass
+
+elif mode == 2:
+    while True:
+        draw_board(board)
+        result = minimax(board, player, mode)
+        if result == 1:
+            input(player + " won!")
+            break
+        elif result == 0:
+            input("Draw.")
+            break
+        player = get_opponent_for(player)
+        move(board, player)
+
+elif mode == 3:
+    pass
