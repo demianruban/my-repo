@@ -109,4 +109,7 @@ elif mode == 2:
         move(board, player)
 
 elif mode == 3:
-    pass
+    computer = get_opponent_for(player)
+    while True:
+        draw_board(board)
+        move(board, player)
