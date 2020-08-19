@@ -109,7 +109,7 @@ while 1:
     rect = rot.get_rect(center=rect.center)
     sc.blit(rot, rect)
     ###########
-    test()
+    #test()
     ###########    
     cars.draw(sc)
     pygame.display.update()
