@@ -103,13 +103,22 @@ while 1:
             while True:
                 for i in pygame.event.get():
                     if i.type == pygame.QUIT: exit()
+
+    if rect.y < -rect.height:
+        pygame.mixer.music.play(start=0)
+        sc.blit(game_over, text_rect)
+        pygame.display.update()
+        while True:
+            for i in pygame.event.get():
+                if i.type == pygame.QUIT: exit()
+        
             
  
     sc.fill(GREY)
     rect = rot.get_rect(center=rect.center)
     sc.blit(rot, rect)
     ###########
-    #test()
+    test()
     ###########    
     cars.draw(sc)
     pygame.display.update()
