@@ -12,7 +12,7 @@ def print_time(to):
     while True:
         if seconds > 58:
             minutes += 1
-            seconds = -1
+            seconds = 0
             
         if minutes > to:
             break
@@ -44,9 +44,11 @@ num = randint(0, 1)
 if num:
     print("\nCurrently playing: Rock'n'roll Racer - Paranoid\n\n")
     mixer.music.load('paranoid.mp3')
+    mixer.music.queue('bad_to_the_bone.mp3')
 if not num:
     print("\nCurrently playing: Rock'n'roll Racer - Bad To The Bone\n\n")
     mixer.music.load('bad_to_the_bone.mp3')
+    mixer.music.queue('paranoid.mp3')
 mixer.music.play()
 
 ERROR = "\nWrong input"
