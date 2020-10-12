@@ -37,7 +37,7 @@ mixer.init()
 work_sound = mixer.Sound('let_the_cornage_begin.ogg')
 rest_sound = mixer.Sound('jake_scores_nockout.wav')
 
-mixer.music.set_volume(0.5)
+mixer.music.set_volume(0.25)
 
 # Randomize between two background songs.
 num = randint(0, 1)
@@ -49,6 +49,7 @@ if not num:
     print("\nCurrently playing: Rock'n'roll Racer - Bad To The Bone\n\n")
     mixer.music.load('bad_to_the_bone.mp3')
     mixer.music.queue('paranoid.mp3')
+    
 mixer.music.play()
 
 ERROR = "\nWrong input"
